@@ -1,12 +1,13 @@
 import React from "react";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { TokenBalance } from "../components/Balance";
+import { TokenBalance } from "../components/TokenBalance";
 import { Contract } from "@ethersproject/contracts";
 import { Web3Provider } from "@ethersproject/providers";
 import web3 from "web3";
 import { SWRConfig } from "swr";
 import { BEP20ABI } from "../utils/abi";
+import { MyBalance } from "../components/MyBalance";
 const injected = new InjectedConnector({ supportedChainIds: [56, 97] });
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       </h2>
       <button onClick={connect}>Connect</button>
       <SWRConfig value={{ fetcher: fetcher(library, BEP20ABI) }}>
+        <MyBalance symbol="BNB" decimals={18} />
         <TokenBalance
           symbol={"Cake"}
           address="0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82"
@@ -48,6 +50,11 @@ function App() {
         <TokenBalance
           symbol={"Bunny"}
           address="0xC9849E6fdB743d08fAeE3E34dd2D1bc69EA11a51"
+          decimals={18}
+        />
+        <TokenBalance
+          symbol={"USDT-BUSD BUNNY POOL"}
+          address="0x866FD0028eb7fc7eeD02deF330B05aB503e199d4"
           decimals={18}
         />
       </SWRConfig>

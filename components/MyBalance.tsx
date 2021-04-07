@@ -4,12 +4,12 @@ import useSWR from "swr";
 import React from "react";
 import { formatUnits } from "@ethersproject/units";
 
-export const TokenBalance = ({ symbol, address, decimals }) => {
+export const MyBalance = ({ symbol, decimals }) => {
   const { account } = useWeb3React<Web3Provider>();
-  const { data: balance } = useSWR([address, "balanceOf", account]);
+  const { data: balance } = useSWR(["getBalance", account, "latest"]);
 
   if (!balance) {
-    return <div>...</div>;
+    return <div>??? {symbol}</div>;
   }
   return (
     <div>
